@@ -1,4 +1,5 @@
 ﻿using Configs;
+using Core.SceneManagement;
 using Core.Services.Audio;
 using Core.Services.Input;
 using Core.Services.PlatformInfo;
@@ -31,6 +32,7 @@ namespace Core.Scopes
             builder.Register<PlayerPrefsJsonSaveLoadService>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<AudioService>(Lifetime.Singleton).AsImplementedInterfaces()
                 .WithParameter(_ => new AudioSources(musicSource, soundSource));
+            builder.Register<SceneLoader>(Lifetime.Singleton);
             
             builder.RegisterEntryPoint<GameStarter>();
         }
