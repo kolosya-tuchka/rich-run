@@ -7,6 +7,6 @@ namespace Configs
     [CreateAssetMenu(menuName = "Configs/" + nameof(LevelsConfig), fileName = nameof(LevelsConfig))]
     public class LevelsConfig : ScriptableObject
     {
-        public List<Level> Levels;
+        public List<string> LevelNames;
     }
 }
