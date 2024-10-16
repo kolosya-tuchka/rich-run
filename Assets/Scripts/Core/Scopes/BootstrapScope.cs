@@ -1,6 +1,7 @@
 ﻿using Configs;
 using Core.SceneManagement;
 using Core.Services.Audio;
+using Core.Services.GameFactory;
 using Core.Services.Input;
 using Core.Services.PlatformInfo;
 using Core.Services.SaveDataHandler;
@@ -15,7 +16,8 @@ namespace Core.Scopes
     public class BootstrapScope : LifetimeScope
     {
         [SerializeField] private GameConfigs gameConfigs;
-        
+
+        [SerializeField] private CoroutineRunner coroutineRunner;
         [SerializeField] private AudioSource musicSource;
         [SerializeField] private AudioSource soundSource;
 
@@ -33,7 +35,11 @@ namespace Core.Scopes
             builder.Register<AudioService>(Lifetime.Singleton).AsImplementedInterfaces()
                 .WithParameter(_ => new AudioSources(musicSource, soundSource));
             builder.Register<SceneLoader>(Lifetime.Singleton);
+            builder.Register<StateMachine.StateMachine>(Lifetime.Singleton);
+            builder.Register<GameFactory>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register(_ => coroutineRunner, Lifetime.Singleton).AsImplementedInterfaces();
             
+            DontDestroyOnLoad(gameObject);
             builder.RegisterEntryPoint<GameStarter>();
         }
         

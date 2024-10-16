@@ -1,5 +1,6 @@
 ﻿using Core.SceneManagement;
 using Core.Services.SaveLoad;
+using Core.StateMachine;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -8,19 +9,18 @@ namespace Core
 {
     public class GameStarter : MonoBehaviour, IInitializable
     {
-        private ISaveLoadService _saveLoadService;
-        private SceneLoader _sceneLoader;
-
+        private StateMachine.StateMachine _stateMachine;
+        
         [Inject]
-        public void Construct(ISaveLoadService saveLoadService, SceneLoader sceneLoader)
+        public void Construct(StateMachine.StateMachine stateMachine)
         {
-            _saveLoadService = saveLoadService;
-            _sceneLoader = sceneLoader;
+            _stateMachine = stateMachine;
         }
 
         public void Initialize()
         {
-            _sceneLoader.LoadScene(SceneName.MainGame);
+            _stateMachine.Initialize();
+            _stateMachine.Enter<LoadProgressState>();
         }
     }
 }

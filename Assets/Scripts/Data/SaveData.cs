@@ -5,7 +5,7 @@ namespace Data
     [Serializable]
     public class SaveData
     {
-        public LevelSaveData LevelSaveData;
-        public MoneySaveData MoneySaveData;
+        public LevelSaveData LevelSaveData = new();
+        public MoneySaveData MoneySaveData = new();
     }
 }

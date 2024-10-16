@@ -300,6 +300,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bffd7b7484bc42b39810788f4c652551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7361986590615360696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1897835896421179068}
+  - component: {fileID: 7992616606944508418}
+  m_Layer: 0
+  m_Name: CoroutineRunner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1897835896421179068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7361986590615360696}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2583157227074342384}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7992616606944508418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7361986590615360696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71dcd62f34f140abb0d1a5eaedb8e6e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9178784412144955088
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,6 +377,7 @@ Transform:
   - {fileID: 4839217320015291293}
   - {fileID: 6691238445274928701}
   - {fileID: 2903742298682265971}
+  - {fileID: 1897835896421179068}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-2481591340640747347
@@ -351,7 +396,8 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects:
-  - {fileID: 0}
+  - {fileID: 5508898553266239149}
   gameConfigs: {fileID: 11400000, guid: 070e7ebd0e9b50a4ebb36bb8af8a8681, type: 2}
+  coroutineRunner: {fileID: 7992616606944508418}
   musicSource: {fileID: 2016652066028574886}
   soundSource: {fileID: 2914905968651264223}

@@ -1,5 +1,8 @@
 ﻿using Configs;
 using Game;
+using Game.Camera;
+using Game.Levels;
+using Game.Player;
 using UnityEngine;
 using VContainer;
 
@@ -32,6 +35,16 @@ namespace Core.Services.GameFactory
         {
             var levelPath = AssetsPath.LevelsFolder + _levelsConfig.LevelNames[levelIndex];
             return Instantiate(levelPath, _mainGameField.transform).GetComponent<Level>();
+        }
+
+        public PlayerController CreatePlayer()
+        {
+            return Instantiate(AssetsPath.Player).GetComponentInChildren<PlayerController>();
+        }
+
+        public CameraFollow CreateCamera()
+        {
+            return Instantiate(AssetsPath.Camera).GetComponent<CameraFollow>();
         }
 
         private GameObject Instantiate(string address, Transform parent)
