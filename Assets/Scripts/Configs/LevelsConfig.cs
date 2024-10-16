@@ -14,7 +14,7 @@ namespace Configs
     [Serializable]
     public class LevelConfig
     {
-        public string Name;
+        public string Name, Title;
         public int AlcoholPoints, MoneyPoints;
     } 
 }

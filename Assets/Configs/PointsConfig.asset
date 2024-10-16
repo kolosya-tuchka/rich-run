@@ -15,11 +15,11 @@ MonoBehaviour:
   InitialPoints: 5
   InitialLevel: 1
   PointLevels:
-  - Name: Lose
+  - Name: "\u0411\u043E\u043C\u0436"
     PointsToUpgrade: 1000
-  - Name: Poor
+  - Name: "\u0411\u0435\u0434\u043D\u044B\u0439"
     PointsToUpgrade: 20
-  - Name: Middle
+  - Name: "\u0421\u0440\u0435\u0434\u043D\u044F\u0447\u043E\u043A"
     PointsToUpgrade: 50
-  - Name: RIch
+  - Name: "\u0411\u043E\u0433\u0430\u0447"
     PointsToUpgrade: 0

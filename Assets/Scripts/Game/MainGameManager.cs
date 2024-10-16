@@ -18,11 +18,12 @@ namespace Game
         private readonly GameplayStarter _gameplayStarter;
         private readonly PlayerLevelView _playerLevelView;
         private readonly WinLoseController _winLoseController;
+        private readonly GameUI _gameUI;
 
         [Inject]
         public MainGameManager(PlayerController player, MainGameField mainGameField,
             CameraFollow cameraFollow, ISaveDataHandler saveDataHandler, GameplayStarter gameplayStarter,
-            PointsController pointsController, PlayerLevelView playerLevelView, WinLoseController winLoseController)
+            PointsController pointsController, PlayerLevelView playerLevelView, WinLoseController winLoseController, GameUI gameUI)
         {
             _player = player;
             _mainGameField = mainGameField;
@@ -32,6 +33,7 @@ namespace Game
             _pointsController = pointsController;
             _playerLevelView = playerLevelView;
             _winLoseController = winLoseController;
+            _gameUI = gameUI;
         }
 
         public void Initialize()
@@ -44,6 +46,7 @@ namespace Game
             _mainGameField.Init();
             _playerLevelView.Init();
             _winLoseController.Init();
+            _gameUI.Init();
             
             _gameplayStarter.Init(StartGameplay);
         }
@@ -52,6 +55,7 @@ namespace Game
         {
             _player.StartGameplay();
             _playerLevelView.StartGameplay();
+            _gameUI.StartGameplay();
         }
         
         private void InformSaveReaders()
