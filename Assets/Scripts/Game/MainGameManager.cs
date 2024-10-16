@@ -24,13 +24,14 @@ namespace Game
         private readonly StateMachine _stateMachine;
         private readonly ISaveLoadService _saveLoadService;
         private readonly PlayerModelSwapper _playerModelSwapper;
+        private readonly PlayerAnimations _playerAnimations;
 
         [Inject]
         public MainGameManager(PlayerController player, MainGameField mainGameField,
             CameraFollow cameraFollow, ISaveDataHandler saveDataHandler, GameplayStarter gameplayStarter,
             PointsController pointsController, PlayerLevelView playerLevelView,
             WinLoseController winLoseController, GameUI gameUI, StateMachine stateMachine,
-            ISaveLoadService saveLoadService, PlayerModelSwapper playerModelSwapper)
+            ISaveLoadService saveLoadService, PlayerModelSwapper playerModelSwapper, PlayerAnimations playerAnimations)
         {
             _player = player;
             _mainGameField = mainGameField;
@@ -44,6 +45,7 @@ namespace Game
             _stateMachine = stateMachine;
             _saveLoadService = saveLoadService;
             _playerModelSwapper = playerModelSwapper;
+            _playerAnimations = playerAnimations;
         }
 
         public void Initialize()
@@ -53,6 +55,7 @@ namespace Game
             _player.Init(_mainGameField.SpawnPoint);
             _pointsController.Init();
             _playerModelSwapper.Init();
+            _playerAnimations.Init();
             _cameraFollow.Init(_player.CameraTarget);
             _mainGameField.Init();
             _playerLevelView.Init();
@@ -65,6 +68,7 @@ namespace Game
         private void StartGameplay()
         {
             _player.StartGameplay();
+            _playerAnimations.StartGameplay();
             _playerLevelView.StartGameplay();
             _gameUI.StartGameplay();
         }

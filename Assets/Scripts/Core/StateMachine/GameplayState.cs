@@ -32,6 +32,7 @@ namespace Core.StateMachine
                 builder.RegisterComponent(player.GetComponent<PointsController>());
                 builder.RegisterComponent(player.GetComponentInChildren<PlayerLevelView>());
                 builder.RegisterComponent(player.GetComponentInChildren<PlayerModelSwapper>());
+                builder.RegisterComponent(player.GetComponentInChildren<PlayerAnimations>());
                 
                 builder.RegisterComponent(_gameFactory.CreateCamera());
                 builder.Register<WinLoseController>(Lifetime.Singleton);
