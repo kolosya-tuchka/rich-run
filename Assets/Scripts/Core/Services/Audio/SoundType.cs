@@ -1,6 +1,6 @@
 namespace Core.Services.Audio {
     public enum SoundType
     {
-        ClickUI, 
+        TakePoints, AddPoints, Lose, Win 
     }
 }

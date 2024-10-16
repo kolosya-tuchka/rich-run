@@ -33,6 +33,7 @@ namespace Core.StateMachine
                 builder.RegisterComponent(player.GetComponentInChildren<PlayerLevelView>());
                 builder.RegisterComponent(player.GetComponentInChildren<PlayerModelSwapper>());
                 builder.RegisterComponent(player.GetComponentInChildren<PlayerAnimations>());
+                builder.Register<PlayerAudio>(Lifetime.Singleton);
                 
                 builder.RegisterComponent(_gameFactory.CreateCamera());
                 builder.Register<WinLoseController>(Lifetime.Singleton);
