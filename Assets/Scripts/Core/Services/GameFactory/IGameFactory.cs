@@ -2,6 +2,7 @@
 using Game.Camera;
 using Game.Levels;
 using Game.Player;
+using Game.UI;
 
 namespace Core.Services.GameFactory
 {
@@ -11,5 +12,6 @@ namespace Core.Services.GameFactory
         Level CreateLevel(int levelIndex);
         PlayerController CreatePlayer();
         CameraFollow CreateCamera();
+        GameUI CreateGameUI();
     }
 }

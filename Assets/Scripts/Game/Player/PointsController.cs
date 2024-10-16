@@ -21,13 +21,24 @@ namespace Game.Player
                 OnPointsChange?.Invoke(_points);
             }
         }
+
+        private int _totalPoints;
+        public int TotalPoints
+        {
+            get => _totalPoints;
+            private set
+            {
+                _totalPoints = value;
+                OnTotalPointsChange?.Invoke(_totalPoints);
+            }
+        }
         
         public int CurrentLevelIndex { get; private set; }
         public PointsLevelConfig CurrentLevel => _levels[CurrentLevelIndex];
         private List<PointsLevelConfig> _levels;
 
         public event Action<PointsLevelConfig> OnLevelChange;
-        public event Action<int> OnPointsChange, OnPointsTake, OnPointsAdd;
+        public event Action<int> OnPointsChange, OnPointsTake, OnPointsAdd, OnTotalPointsChange;
 
         [Inject]
         public void Construct(GameConfigs gameConfigs)
@@ -39,13 +50,14 @@ namespace Game.Player
         {
             _levels = _pointsConfig.PointLevels;
             CurrentLevelIndex = _pointsConfig.InitialLevel;
-            Points = _pointsConfig.InitialPoints;
+            Points = TotalPoints = _pointsConfig.InitialPoints;
         }
 
         public void Add(int points)
         {
             points = Mathf.Clamp(points, 0, points);
             Points += points;
+            TotalPoints += points;
 
             if (Points >= CurrentLevel.PointsToUpgrade && CurrentLevelIndex < _levels.Count - 1)
             {
@@ -62,6 +74,7 @@ namespace Game.Player
         {
             points = Mathf.Clamp(points, 0, points);
             Points -= points;
+            TotalPoints -= points;
             
             if (Points < 0 && CurrentLevelIndex > 0)
             {

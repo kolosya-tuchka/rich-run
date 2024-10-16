@@ -3,6 +3,7 @@ using Game;
 using Game.Camera;
 using Game.Levels;
 using Game.Player;
+using Game.UI;
 using UnityEngine;
 using VContainer;
 
@@ -45,6 +46,11 @@ namespace Core.Services.GameFactory
         public CameraFollow CreateCamera()
         {
             return Instantiate(AssetsPath.Camera).GetComponent<CameraFollow>();
+        }
+
+        public GameUI CreateGameUI()
+        {
+            return Instantiate(AssetsPath.GameUI).GetComponent<GameUI>();
         }
 
         private GameObject Instantiate(string address, Transform parent)

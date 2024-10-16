@@ -36,6 +36,8 @@ namespace Core.StateMachine
                 builder.Register<WinLoseController>(Lifetime.Singleton);
                 builder.Register<GameplayStarter>(Lifetime.Singleton);
 
+                builder.RegisterComponent(_gameFactory.CreateGameUI());
+
                 builder.RegisterEntryPoint<MainGameManager>();
             });
         }
