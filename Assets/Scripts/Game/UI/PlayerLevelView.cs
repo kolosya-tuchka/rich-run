@@ -41,6 +41,7 @@ namespace Game.UI
         {
             levelText.text = pointsLevelConfig.Name;
             _maxPoints = pointsLevelConfig.PointsToUpgrade;
+            OnPointsChange(_pointsController.Points);
         }
 
         private void OnPointsChange(int points)
