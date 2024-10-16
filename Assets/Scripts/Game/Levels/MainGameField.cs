@@ -1,4 +1,5 @@
-﻿using Configs;
+﻿using System;
+using Configs;
 using Core.Services.GameFactory;
 using Core.Services.SaveDataHandler;
 using Data;
@@ -10,6 +11,8 @@ namespace Game.Levels
 {
     public class MainGameField : MonoBehaviour, ISaveReader
     {
+        public event Action OnPlayerFinished; 
+        
         private Level _level;
         private IGameFactory _gameFactory;
         private GameConfigs _gameConfigs;
@@ -30,7 +33,7 @@ namespace Game.Levels
 
         public void Init()
         {
-            _level.Init(_levelConfig);
+            _level.Init(_levelConfig, PlayerFinish);
         }
 
         public void ReadSave(SaveData saveData)
@@ -38,6 +41,11 @@ namespace Game.Levels
             var currentLevel = saveData.LevelSaveData.CurrentLevel;
             _level = _gameFactory.CreateLevel(currentLevel);
             _levelConfig = _gameConfigs.LevelsConfig.Levels[currentLevel];
+        }
+
+        private void PlayerFinish()
+        {
+            OnPlayerFinished?.Invoke();
         }
     }
 }

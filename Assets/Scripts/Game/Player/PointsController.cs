@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Configs;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 
 namespace Game.Player
@@ -21,9 +22,9 @@ namespace Game.Player
             }
         }
         
-        public PointsLevelConfig CurrentLevel => _levels[_currentLevelIndex];
+        public int CurrentLevelIndex { get; private set; }
+        public PointsLevelConfig CurrentLevel => _levels[CurrentLevelIndex];
         private List<PointsLevelConfig> _levels;
-        private int _currentLevelIndex;
 
         public event Action<PointsLevelConfig> OnLevelChange;
         public event Action<int> OnPointsChange, OnPointsTake, OnPointsAdd;
@@ -37,7 +38,7 @@ namespace Game.Player
         public void Init()
         {
             _levels = _pointsConfig.PointLevels;
-            _currentLevelIndex = _pointsConfig.InitialLevel;
+            CurrentLevelIndex = _pointsConfig.InitialLevel;
             Points = _pointsConfig.InitialPoints;
         }
 
@@ -46,10 +47,10 @@ namespace Game.Player
             points = Mathf.Clamp(points, 0, points);
             Points += points;
 
-            if (Points >= CurrentLevel.PointsToUpgrade && _currentLevelIndex < _levels.Count - 1)
+            if (Points >= CurrentLevel.PointsToUpgrade && CurrentLevelIndex < _levels.Count - 1)
             {
                 Points -= CurrentLevel.PointsToUpgrade;
-                ++_currentLevelIndex;
+                ++CurrentLevelIndex;
                 OnLevelChange?.Invoke(CurrentLevel);
             }
             
@@ -62,9 +63,9 @@ namespace Game.Player
             points = Mathf.Clamp(points, 0, points);
             Points -= points;
             
-            if (Points < 0 && _currentLevelIndex > 0)
+            if (Points < 0 && CurrentLevelIndex > 0)
             {
-                --_currentLevelIndex;
+                --CurrentLevelIndex;
                 Points += CurrentLevel.PointsToUpgrade;
                 OnLevelChange?.Invoke(CurrentLevel);
             }

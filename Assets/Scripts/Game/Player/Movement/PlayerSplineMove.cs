@@ -31,6 +31,11 @@ namespace Game.Player.Movement
             splineAnimate.Play();
         }
 
+        public override void StopMove()
+        {
+            splineAnimate.Pause();
+        }
+
         public override void UpdateMove(float direction)
         {
             transform.Translate(Vector3.right * (direction * _playerConfig.SidewaysSpeed));

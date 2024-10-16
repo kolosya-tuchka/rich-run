@@ -17,10 +17,12 @@ namespace Game
         private readonly ISaveDataHandler _saveDataHandler;
         private readonly GameplayStarter _gameplayStarter;
         private readonly PlayerLevelView _playerLevelView;
+        private readonly WinLoseController _winLoseController;
 
         [Inject]
         public MainGameManager(PlayerController player, MainGameField mainGameField,
-            CameraFollow cameraFollow, ISaveDataHandler saveDataHandler, GameplayStarter gameplayStarter, PointsController pointsController, PlayerLevelView playerLevelView)
+            CameraFollow cameraFollow, ISaveDataHandler saveDataHandler, GameplayStarter gameplayStarter,
+            PointsController pointsController, PlayerLevelView playerLevelView, WinLoseController winLoseController)
         {
             _player = player;
             _mainGameField = mainGameField;
@@ -29,6 +31,7 @@ namespace Game
             _gameplayStarter = gameplayStarter;
             _pointsController = pointsController;
             _playerLevelView = playerLevelView;
+            _winLoseController = winLoseController;
         }
 
         public void Initialize()
@@ -40,6 +43,7 @@ namespace Game
             _cameraFollow.Init(_player.CameraTarget);
             _mainGameField.Init();
             _playerLevelView.Init();
+            _winLoseController.Init();
             
             _gameplayStarter.Init(StartGameplay);
         }

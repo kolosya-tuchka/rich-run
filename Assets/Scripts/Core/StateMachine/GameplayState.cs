@@ -33,6 +33,7 @@ namespace Core.StateMachine
                 builder.RegisterComponent(player.GetComponentInChildren<PlayerLevelView>());
                 
                 builder.RegisterComponent(_gameFactory.CreateCamera());
+                builder.Register<WinLoseController>(Lifetime.Singleton);
                 builder.Register<GameplayStarter>(Lifetime.Singleton);
 
                 builder.RegisterEntryPoint<MainGameManager>();
