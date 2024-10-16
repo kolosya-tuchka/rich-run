@@ -1,4 +1,6 @@
 ﻿using Core.Services.SaveDataHandler;
+using Core.Services.SaveLoad;
+using Core.StateMachine;
 using Game.Camera;
 using Game.Levels;
 using Game.Player;
@@ -19,11 +21,15 @@ namespace Game
         private readonly PlayerLevelView _playerLevelView;
         private readonly WinLoseController _winLoseController;
         private readonly GameUI _gameUI;
+        private readonly StateMachine _stateMachine;
+        private readonly ISaveLoadService _saveLoadService;
 
         [Inject]
         public MainGameManager(PlayerController player, MainGameField mainGameField,
             CameraFollow cameraFollow, ISaveDataHandler saveDataHandler, GameplayStarter gameplayStarter,
-            PointsController pointsController, PlayerLevelView playerLevelView, WinLoseController winLoseController, GameUI gameUI)
+            PointsController pointsController, PlayerLevelView playerLevelView,
+            WinLoseController winLoseController, GameUI gameUI, StateMachine stateMachine,
+            ISaveLoadService saveLoadService)
         {
             _player = player;
             _mainGameField = mainGameField;
@@ -34,6 +40,8 @@ namespace Game
             _playerLevelView = playerLevelView;
             _winLoseController = winLoseController;
             _gameUI = gameUI;
+            _stateMachine = stateMachine;
+            _saveLoadService = saveLoadService;
         }
 
         public void Initialize()
@@ -46,7 +54,7 @@ namespace Game
             _mainGameField.Init();
             _playerLevelView.Init();
             _winLoseController.Init();
-            _gameUI.Init();
+            _gameUI.Init(RestartGame);
             
             _gameplayStarter.Init(StartGameplay);
         }
@@ -64,6 +72,13 @@ namespace Game
             {
                 saveReader.ReadSave(_saveDataHandler.SaveData);
             }
+        }
+
+        private void RestartGame()
+        {
+            _saveLoadService.SaveData();
+            _saveDataHandler.CleanUp();
+            _stateMachine.Enter<LoadGameState>();
         }
     }
 }
