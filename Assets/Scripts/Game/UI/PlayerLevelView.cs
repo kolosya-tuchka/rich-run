@@ -1,13 +1,19 @@
 ﻿using Configs;
 using Game.Player;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using VContainer;
 
 namespace Game.UI
 {
     public class PlayerLevelView : MonoBehaviour
     {
+        [SerializeField] private Image pointsBar;
+        [SerializeField] private TMP_Text levelText;
         private PointsController _pointsController;
+
+        private int _maxPoints;
         
         [Inject]
         public void Construct(PointsController pointsController)
@@ -20,6 +26,9 @@ namespace Game.UI
             _pointsController.OnLevelChange += OnLevelChange;
             _pointsController.OnPointsChange += OnPointsChange;
             
+            OnLevelChange(_pointsController.CurrentLevel);
+            OnPointsChange(_pointsController.Points);       
+            
             gameObject.SetActive(false);
         }
 
@@ -30,12 +39,13 @@ namespace Game.UI
 
         private void OnLevelChange(PointsLevelConfig pointsLevelConfig)
         {
-            Debug.Log(pointsLevelConfig.Name);
+            levelText.text = pointsLevelConfig.Name;
+            _maxPoints = pointsLevelConfig.PointsToUpgrade;
         }
 
         private void OnPointsChange(int points)
         {
-            Debug.Log($"Points: {points}");
+            pointsBar.fillAmount = (float)points / _maxPoints;
         }
     }
 }

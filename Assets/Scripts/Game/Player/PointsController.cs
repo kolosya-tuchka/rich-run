@@ -11,19 +11,19 @@ namespace Game.Player
         private PointsConfig _pointsConfig;
 
         private int _points;
-        private int Points
+        public int Points
         {
             get => _points;
-            set
+            private set
             {
                 _points = value;
                 OnPointsChange?.Invoke(_points);
             }
         }
-
+        
+        public PointsLevelConfig CurrentLevel => _levels[_currentLevelIndex];
         private List<PointsLevelConfig> _levels;
         private int _currentLevelIndex;
-        private PointsLevelConfig CurrentLevel => _levels[_currentLevelIndex];
 
         public event Action<PointsLevelConfig> OnLevelChange;
         public event Action<int> OnPointsChange, OnPointsTake, OnPointsAdd;
@@ -36,9 +36,9 @@ namespace Game.Player
 
         public void Init()
         {
-            Points = _pointsConfig.InitialPoints;
             _levels = _pointsConfig.PointLevels;
             _currentLevelIndex = _pointsConfig.InitialLevel;
+            Points = _pointsConfig.InitialPoints;
         }
 
         public void Add(int points)
