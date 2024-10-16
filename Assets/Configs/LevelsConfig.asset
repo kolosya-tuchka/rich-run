@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab623cfa45b644af8f59e55826583ccd, type: 3}
   m_Name: LevelsConfig
   m_EditorClassIdentifier: 
-  LevelNames:
-  - Level1
-  - Level2
+  Levels:
+  - Name: Level1
+    AlcoholPoints: 2
+    MoneyPoints: 5
+  - Name: Level2
+    AlcoholPoints: 4
+    MoneyPoints: 5

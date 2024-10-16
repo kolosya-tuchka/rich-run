@@ -12,20 +12,32 @@ namespace Game.Levels
     {
         private Level _level;
         private IGameFactory _gameFactory;
+        private GameConfigs _gameConfigs;
 
+        private LevelConfig _levelConfig;
+        
         public Vector3 SpawnPoint => _level.SpawnPoint;
         public SplineContainer MoveSpline => _level.MoveSpline;
         
         [Inject]
-        public void Construct(IGameFactory gameFactory, ISaveDataHandler saveDataHandler)
+        public void Construct(IGameFactory gameFactory, ISaveDataHandler saveDataHandler,
+            GameConfigs gameConfigs)
         {
             saveDataHandler.RegisterSaveReader(this);
             _gameFactory = gameFactory;
+            _gameConfigs = gameConfigs;
+        }
+
+        public void Init()
+        {
+            _level.Init(_levelConfig);
         }
 
         public void ReadSave(SaveData saveData)
         {
-            _level = _gameFactory.CreateLevel(saveData.LevelSaveData.CurrentLevel);
+            var currentLevel = saveData.LevelSaveData.CurrentLevel;
+            _level = _gameFactory.CreateLevel(currentLevel);
+            _levelConfig = _gameConfigs.LevelsConfig.Levels[currentLevel];
         }
     }
 }

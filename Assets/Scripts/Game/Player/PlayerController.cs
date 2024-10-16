@@ -19,7 +19,6 @@ namespace Game.Player
         private PlayerConfig _playerConfig;
 
         public Transform CameraTarget => cameraTarget;
-        public PlayerMove PlayerMove => playerMove;
 
         [Inject]
         public void Construct(IInputService inputService, GameConfigs gameConfigs)

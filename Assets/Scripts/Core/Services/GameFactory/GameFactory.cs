@@ -33,7 +33,7 @@ namespace Core.Services.GameFactory
 
         public Level CreateLevel(int levelIndex)
         {
-            var levelPath = AssetsPath.LevelsFolder + _levelsConfig.LevelNames[levelIndex];
+            var levelPath = AssetsPath.LevelsFolder + _levelsConfig.Levels[levelIndex].Name;
             return Instantiate(levelPath, _mainGameField.transform).GetComponent<Level>();
         }
 

@@ -1,6 +1,8 @@
-﻿using System;
-using Core.Services.GameFactory;
+﻿using Core.Services.GameFactory;
 using Game;
+using Game.Player;
+using Game.Player.Movement;
+using Game.UI;
 using VContainer;
 using VContainer.Unity;
 
@@ -26,7 +28,9 @@ namespace Core.StateMachine
 
                 var player = _gameFactory.CreatePlayer();
                 builder.RegisterComponent(player);
-                builder.RegisterComponent(player.PlayerMove);
+                builder.RegisterComponent(player.GetComponent<PlayerMove>());
+                builder.RegisterComponent(player.GetComponent<PointsController>());
+                builder.RegisterComponent(player.GetComponentInChildren<PlayerLevelView>());
                 
                 builder.RegisterComponent(_gameFactory.CreateCamera());
                 builder.Register<GameplayStarter>(Lifetime.Singleton);

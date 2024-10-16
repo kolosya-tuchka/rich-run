@@ -8,5 +8,6 @@ namespace Configs
         public AudioConfig AudioConfig;
         public LevelsConfig LevelsConfig;
         public PlayerConfig PlayerConfig;
+        public PointsConfig PointsConfig;
     }
 }

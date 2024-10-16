@@ -15,3 +15,4 @@ MonoBehaviour:
   AudioConfig: {fileID: 11400000, guid: c4a699e5c24141e469eea0ba6ba1b69a, type: 2}
   LevelsConfig: {fileID: 11400000, guid: 04432052b5a756346ba3b80bdf8206a5, type: 2}
   PlayerConfig: {fileID: 11400000, guid: 00ce15e78f7dab64f8aefe9f84bd5996, type: 2}
+  PointsConfig: {fileID: 11400000, guid: 7c3c8273dbdb20e4db331fc009f15c74, type: 2}
