@@ -7,7 +7,7 @@ namespace Configs
     public class PlayerConfig : ScriptableObject
     {
         public float ForwardSpeed = 1f;
-        [FormerlySerializedAs("SideSpeed")] public float SidewaysSpeed = 2f;
-        [Range(0, 1)] public float SidewaysMovementThreshold = 0.1f;
+        public float SidewaysSpeed = 2f;
+        public float RoadWidth = 0.45f;
     }
 }

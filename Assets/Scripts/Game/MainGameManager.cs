@@ -2,7 +2,6 @@
 using Game.Camera;
 using Game.Levels;
 using Game.Player;
-using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -14,15 +13,17 @@ namespace Game
         private readonly MainGameField _mainGameField;
         private readonly CameraFollow _cameraFollow;
         private readonly ISaveDataHandler _saveDataHandler;
+        private readonly GameplayStarter _gameplayStarter;
 
         [Inject]
         public MainGameManager(PlayerController player, MainGameField mainGameField,
-            CameraFollow cameraFollow, ISaveDataHandler saveDataHandler)
+            CameraFollow cameraFollow, ISaveDataHandler saveDataHandler, GameplayStarter gameplayStarter)
         {
             _player = player;
             _mainGameField = mainGameField;
             _cameraFollow = cameraFollow;
             _saveDataHandler = saveDataHandler;
+            _gameplayStarter = gameplayStarter;
         }
 
         public void Initialize()
@@ -31,6 +32,13 @@ namespace Game
             
             _player.Init(_mainGameField.SpawnPoint);
             _cameraFollow.Init(_player.CameraTarget);
+            
+            _gameplayStarter.Init(StartGameplay);
+        }
+
+        private void StartGameplay()
+        {
+            _player.StartGameplay();
         }
         
         private void InformSaveReaders()

@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 namespace Core.Services.Input {
     public sealed class MobileInputService : IInputService
     {
-        public bool GetMouseDown() {
+        public bool GetMouseButtonDown() {
             return UnityEngine.Input.touches.Length > 0 &&
                    UnityEngine.Input.touches[0].phase == TouchPhase.Began;
         }
@@ -15,15 +15,25 @@ namespace Core.Services.Input {
                    UnityEngine.Input.touches[0].phase == TouchPhase.Ended;
         }
 
-        public Vector2 GetMouseMove()
+        public bool GetMouseButton()
+        {
+            return UnityEngine.Input.touches.Length > 0;
+        }
+
+        public float GetMouseMoveX()
         {
             if ( UnityEngine.Input.touchCount <= 0)
             {
-                return Vector2.zero;
+                return 0;
             }
             
             var touch = UnityEngine.Input.GetTouch(0);
-            return touch.phase == TouchPhase.Moved ? -touch.deltaPosition : Vector2.zero;
+            if (touch.phase != TouchPhase.Moved)
+            {
+                return 0;
+            }
+
+            return (touch.deltaPosition.x / Screen.width - 0.5f) * 2;
         }
     }
 }

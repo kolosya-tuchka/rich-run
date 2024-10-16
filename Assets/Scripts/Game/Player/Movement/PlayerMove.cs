@@ -6,5 +6,6 @@ namespace Game.Player.Movement
     {
         public abstract void StartMove();
         public abstract void UpdateMove(float direction);
+        public virtual void Init() {}
     }
 }

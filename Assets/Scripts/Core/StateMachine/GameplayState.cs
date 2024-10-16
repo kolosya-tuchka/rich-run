@@ -23,8 +23,13 @@ namespace Core.StateMachine
             _mainGameScope = _projectScope.CreateChild(builder =>
             {
                 builder.RegisterComponent(_gameFactory.CreateMainGameField());
-                builder.RegisterComponent(_gameFactory.CreatePlayer());
+
+                var player = _gameFactory.CreatePlayer();
+                builder.RegisterComponent(player);
+                builder.RegisterComponent(player.PlayerMove);
+                
                 builder.RegisterComponent(_gameFactory.CreateCamera());
+                builder.Register<GameplayStarter>(Lifetime.Singleton);
 
                 builder.RegisterEntryPoint<MainGameManager>();
             });
